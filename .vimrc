@@ -23,11 +23,11 @@ augroup END
 
 " 
 inoremap ( ()<Left>
-"inoremap (<Enter> ()<Left><CR><ESC><S-o>
+inoremap (<Enter> ()<Left><CR><ESC><S-o>
 inoremap { {}<Left>
-"inoremap {<Enter> {}<Left><CR><ESC><S-o>
-"inoremap [ []<Left>
-"inoremap " ""<Left>
+inoremap {<Enter> {}<Left><CR><ESC><S-o>
+inoremap [ []<Left>
+inoremap " ""<Left>
 "inoremap ' ''<Left>
 
 " open Quickfix automatically
@@ -50,6 +50,7 @@ highlight LineNr ctermbg=234
 hi clear CursorLine
 highlight CursorLine ctermbg=233
 
+set clipboard=unnamed,autoselect
 set ignorecase
 set smartcase
 set backspace=start,eol,indent
@@ -61,6 +62,7 @@ set number
 set ruler
 set cursorline
 set title
+set t_Co=256
 syntax on
 set expandtab
 set tabstop=4
