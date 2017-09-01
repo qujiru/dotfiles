@@ -8,10 +8,19 @@ set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 call dein#begin(expand('~/.vim/dein'))
 call dein#add('Shougo/dein.vim')
 call dein#add('tomasr/molokai')
+call dein#add('kovisoft/slimv')
 call dein#end()
 filetype plugin indent on
 if dein#check_install()
     call dein#install()
+endif
+
+" "
+if has("autocmd")
+    autocmd BufReadPost * 
+    \   if line("'\"") > 0 && line("'\"") <= line("$") |
+    \     exe "normal! g'\"" |
+    \   endif
 endif
 
 " INSERT, NORMAL mode status line  color
@@ -73,3 +82,5 @@ set smartindent
 "set cindent
 set noswapfile
 
+" slimv
+let g:paredit_electric_return = 0
