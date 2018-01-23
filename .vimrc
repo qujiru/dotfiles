@@ -44,7 +44,8 @@ autocmd QuickFixCmdPost make,grep,grepadd,vimgrep,vimgrep copen
 
 colorscheme molokai
 
-nnoremap <space>b :w<CR>:make<CR>
+inoremap jk <esc>
+nnoremap <space>b :w<CR>:make expand("%:r")<CR>
 nnoremap <space>r :make run<CR>
 nnoremap <space>c :cclose<CR>
 nnoremap <space>w :w<CR>
@@ -61,6 +62,8 @@ highlight CursorLine ctermbg=233
 
 set clipboard=unnamed,autoselect
 set ignorecase
+"set hlsearch
+set incsearch
 set smartcase
 set backspace=start,eol,indent
 set shortmess=a
@@ -84,3 +87,15 @@ set noswapfile
 
 " slimv
 let g:paredit_electric_return = 0
+
+augroup vimrc-local
+    autocmd!
+    autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+augroup END
+
+function! s:vimrc_local(loc)
+    let files = findfile('.vimrc.local', escape(a:loc, ' ') . ';', -1)
+    for i in reverse(filter(files, 'filereadable(v:val)'))
+        source `=i`
+    endfor
+endfunction
